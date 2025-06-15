@@ -2,16 +2,18 @@ name: Terraform CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  terraform:
-    name: Terraform Format, Plan, and Apply
+  dev:
+    name: Terraform - Dev
     runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: "AKIAQ4J5YAY5PPVZKLHI"
+      AWS_SECRET_ACCESS_KEY: "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"
 
     defaults:
       run:
@@ -23,8 +25,38 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.6.6
+
+      - name: Terraform Format
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -var-file=terraform.tfvars
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
+
+  staging:
+    name: Terraform - Staging
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: "AKIAQ4J5YAY5PPVZKLHI"
+      AWS_SECRET_ACCESS_KEY: "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"
+
+    defaults:
+      run:
+        working-directory: ./envs/staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Format
         run: terraform fmt -check -recursive
