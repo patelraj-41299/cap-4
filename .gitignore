@@ -1,0 +1,21 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.backup
+
+# VS Code
+.vscode/
+
+# ZIPs and large files
+*.zip
+*.log
+
+# EC2 key files
+*.pem
+
+# Node modules (if any)
+node_modules/
+
+# Docker build cache
+**/Dockerfile
