@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      AWS_ACCESS_KEY_ID: "AKIAQ4J5YAY5PPVZKLHI"
-      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
 
     defaults:
       run:
@@ -44,8 +44,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      AWS_ACCESS_KEY_ID: "AKIAQ4J5YAY5PPVZKLHI"
-      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
 
     defaults:
       run:
