@@ -9,7 +9,7 @@ public_subnet_cidrs = [
 
 azs = ["us-east-1a", "us-east-1b"]
 
-ami_id = "ami-0c02fb55956c7d316"
+ami_id        = "ami-0c02fb55956c7d316"
 instance_type = "t2.micro"
-key_name = "key-1"
+key_name      = "key-1"
 
