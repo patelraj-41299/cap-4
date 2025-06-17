@@ -1,9 +1,9 @@
 resource "aws_codebuild_project" "this" {
-  name          = "${var.env}-codebuild"
-  service_role  = var.codebuild_role_arn
+  name         = "${var.env}-codebuild"
+  service_role = var.codebuild_role_arn
 
   artifacts {
-    type = "S3"
+    type     = "S3"
     location = var.artifact_bucket
     packaging = "ZIP"
   }
