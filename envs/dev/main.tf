@@ -1,4 +1,3 @@
-### ✅ envs/dev/main.tf
 provider "aws" {
   region = "us-east-1"
 }
@@ -43,16 +42,12 @@ module "dev_codebuild" {
 }
 
 module "codepipeline" {
-  source               = "../../modules/codepipeline"
-  region               = "us-east-1"
-  environment          = "dev"
-  github_owner         = "patelraj-41299"
-  github_repo          = "cap-4"
-  github_branch        = "main"
-  codestar_connection_arn = "arn:aws:codeconnections:us-east-1:060795913786:connection/ba598d05-f246-4892-b8aa-307b4cc55c6a"
-  artifact_store_bucket = "cap4-terraform-state"
-  codebuild_role_arn     = "arn:aws:iam::060795913786:role/codebuild-role"
-  codepipeline_role_arn  = "arn:aws:iam::060795913786:role/codepipeline-role"
+  source            = "../../modules/codepipeline"
+  name              = "cap4-dev-pipeline"
+  role_arn          = "arn:aws:iam::060795913786:role/codepipeline-role"
+  artifact_bucket   = "cap4-terraform-state"
+  connection_arn    = "arn:aws:codeconnections:us-east-1:060795913786:connection/ba598d05-f246-4892-b8aa-307b4cc55c6a"
+  repository        = "patelraj-41299/cap-4"
+  branch            = "main"
+  codebuild_project = module.dev_codebuild.project_name
 }
-
-
