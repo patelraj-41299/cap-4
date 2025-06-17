@@ -36,9 +36,13 @@ module "alb" {
 
 module "dev_codebuild" {
   source             = "../../modules/codebuild"
-  environment        = "dev"
-  codebuild_role_arn = "arn:aws:iam::060795913786:role/codebuild-role"
-  s3_bucket          = "cap4-terraform-artifacts-dev"
+  name               = "dev-codebuild"
+  env                = var.env
+  role_arn           = "arn:aws:iam::060795913786:role/codebuild-role"
+  artifact_bucket    = "cap4-terraform-artifacts-dev"
+  repo_url           = "https://github.com/patelraj-41299/cap-4"
+  branch             = "main"
+  buildspec_location = "envs/dev/buildspec.yml"
 }
 
 module "codepipeline" {
