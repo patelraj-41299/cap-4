@@ -34,3 +34,10 @@ module "alb" {
   security_group_id = module.security_groups.ec2_sg_id
   vpc_id            = module.vpc.vpc_id
 }
+
+module "dev_codebuild" {
+  source             = "../../modules/codebuild"
+  environment        = "dev"
+  codebuild_role_arn = "arn:aws:iam::060795913786:role/codebuild-role"
+  s3_bucket          = "cap4-terraform-artifacts-dev"
+}
