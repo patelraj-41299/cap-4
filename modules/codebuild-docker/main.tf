@@ -8,24 +8,25 @@ resource "aws_codebuild_project" "this" {
   }
 
   environment {
-    compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:7.0"
-    type                        = "LINUX_CONTAINER"
-    privileged_mode             = true
-    environment_variables = [
-      {
-        name  = "REPO_URL"
-        value = var.repo_url
-      },
-      {
-        name  = "BRANCH"
-        value = var.branch
-      },
-      {
-        name  = "ENV"
-        value = var.env
-      }
-    ]
+    compute_type    = "BUILD_GENERAL1_SMALL"
+    image           = "aws/codebuild/standard:7.0"
+    type            = "LINUX_CONTAINER"
+    privileged_mode = true
+
+    environment_variable {
+      name  = "REPO_URL"
+      value = var.repo_url
+    }
+
+    environment_variable {
+      name  = "BRANCH"
+      value = var.branch
+    }
+
+    environment_variable {
+      name  = "ENV"
+      value = var.env
+    }
   }
 
   source {
@@ -37,9 +38,8 @@ resource "aws_codebuild_project" "this" {
 
   logs_config {
     cloudwatch_logs {
-      group_name = "/aws/codebuild/cap4-${var.env}-docker"
+      group_name  = "/aws/codebuild/cap4-${var.env}-docker"
       stream_name = "build-log"
     }
   }
 }
-

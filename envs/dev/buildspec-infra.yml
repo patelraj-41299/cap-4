@@ -4,14 +4,19 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 060795913786.dkr.ecr.us-east-1.amazonaws.com
+      - aws --version
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - REPO_URI=060795913786.dkr.ecr.us-east-1.amazonaws.com/cap4-app-dev
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=latest
   build:
     commands:
-      - echo Build started on `date`
-      - cd app/frontend
-      - docker build -t cap4-app-dev .
-      - docker tag cap4-app-dev:latest 060795913786.dkr.ecr.us-east-1.amazonaws.com/cap4-app-dev:latest
+      - echo Building the Docker image...
+      - docker build -t $REPO_URI:$IMAGE_TAG ./app/frontend
   post_build:
     commands:
-      - echo Build completed on `date`
-      - docker push 060795913786.dkr.ecr.us-east-1.amazonaws.com/cap4-app-dev:latest
+      - echo Pushing the Docker image...
+      - docker push $REPO_URI:$IMAGE_TAG
+      - echo "Docker image pushed: $REPO_URI:$IMAGE_TAG"
+artifacts:
+  files: '**/*'

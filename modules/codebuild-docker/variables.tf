@@ -3,28 +3,27 @@ variable "codebuild_role_arn" {
   type        = string
 }
 
-variable "env" {
-  description = "Environment name (e.g., dev, staging, prod)"
-  type        = string
-}
-
 variable "repo_url" {
-  description = "GitHub repository HTTPS URL"
+  description = "GitHub repo URL"
   type        = string
 }
 
 variable "branch" {
-  description = "GitHub branch to build from"
+  description = "GitHub branch name"
   type        = string
 }
 
 variable "artifact_bucket" {
-  description = "S3 bucket where CodeBuild artifacts will be stored"
+  description = "S3 bucket for storing build artifacts"
   type        = string
 }
 
 variable "buildspec_location" {
-  description = "Path to the buildspec.yml or docker-buildspec.yml inside the project"
+  description = "Path to the buildspec.yml file"
   type        = string
 }
 
+variable "env" {
+  description = "Deployment environment"
+  type        = string
+}
