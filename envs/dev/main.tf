@@ -57,12 +57,11 @@ module "codepipeline" {
 }
 
 module "dev_codebuild_docker" {
-  source             = "../../modules/codebuild"
-  name               = "dev-codebuild-docker"
+  source             = "../../modules/codebuild-docker"
+  codebuild_role_arn = "arn:aws:iam::060795913786:role/codebuild-role"
   env                = var.env
-  role_arn           = "arn:aws:iam::060795913786:role/codebuild-role"
-  artifact_bucket    = "cap4-terraform-artifacts-dev"
   repo_url           = "https://github.com/patelraj-41299/cap-4"
   branch             = "main"
-  buildspec_location = "envs/dev/buildspec-docker.yml"
+  artifact_bucket    = "cap4-terraform-artifacts-dev"
+  buildspec_location = "app/frontend/buildspec.yml"
 }
