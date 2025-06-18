@@ -8,11 +8,13 @@ phases:
   build:
     commands:
       - echo Building Docker image...
+      - cd app  # ⬅️ This is the fix!
       - docker build -t cap4-app-dev .
       - docker tag cap4-app-dev:latest 060795913786.dkr.ecr.us-east-1.amazonaws.com/cap4-app-dev:latest
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
       - docker push 060795913786.dkr.ecr.us-east-1.amazonaws.com/cap4-app-dev:latest
+
 artifacts:
   files: '**/*'
