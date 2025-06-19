@@ -68,7 +68,11 @@ module "dev_codebuild_docker" {
 module "codedeploy" {
   source = "../../modules/codedeploy"
 
-  env                 = var.env
-  codedeploy_role_arn = "arn:aws:iam::060795913786:role/CodeDeployServiceRole"
-  target_group_name   = "cap4-dev-tg"
+  vpc_id = module.vpc.vpc_id  # or replace with your actual vpc_id reference
+  target_group_name = "cap4-tg-dev"
+  alb_listener_arn  = module.alb.listener_arn
+  asg_name          = module.ec2.autoscaling_group_name
+  deployment_group_name = "cap4-dg-dev"
+  app_name              = "cap4-app-dev"
+  service_role_arn      = "arn:aws:iam::060795913786:role/CodeDeployServiceRole"
 }
