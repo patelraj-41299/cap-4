@@ -1,6 +1,6 @@
 resource "aws_codedeploy_app" "this" {
-  name              = var.app_name
-  compute_platform  = "Server"
+  name             = var.app_name
+  compute_platform = "Server"
 }
 
 resource "aws_codedeploy_deployment_group" "this" {
