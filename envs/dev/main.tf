@@ -65,3 +65,9 @@ module "dev_codebuild_docker" {
   artifact_bucket    = "cap4-terraform-artifacts-dev"
   buildspec_location = "app/frontend/buildspec.yml"
 }
+module "codedeploy" {
+  source = "../../modules/codedeploy"
+
+  codedeploy_role_arn = "arn:aws:iam::060795913786:role/CodeDeployServiceRole"
+  target_group_name   = "cap4-dev-tg"  # Replace with your actual ALB target group name
+}
