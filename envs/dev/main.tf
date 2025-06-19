@@ -68,6 +68,7 @@ module "dev_codebuild_docker" {
 module "codedeploy" {
   source = "../../modules/codedeploy"
 
+  env                 = var.env
   codedeploy_role_arn = "arn:aws:iam::060795913786:role/CodeDeployServiceRole"
-  target_group_name   = "cap4-dev-tg"  # Replace with your actual ALB target group name
+  target_group_name   = "cap4-dev-tg"
 }
