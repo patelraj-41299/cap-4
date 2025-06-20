@@ -15,9 +15,9 @@ resource "aws_codedeploy_deployment_group" "this" {
 
   ec2_tag_set {
     ec2_tag_filter {
-      key   = "Name"
-      type  = "KEY_AND_VALUE"
-      value = "cap4-${var.env}-ec2"
+      key   = var.ec2_tag_key   # "Name"
+      type  = var.ec2_tag_type  # "KEY_AND_VALUE"
+      value = var.ec2_tag_value # "cap4-${var.env}-ec2"
     }
   }
 
