@@ -12,6 +12,4 @@ phases:
 
 artifacts:
   files:
-    - appspec.yml
-    - scripts/**
-    - app/frontend/stylish-1.0.0/**
+    - app/**/*     # includes appspec.yml + scripts
