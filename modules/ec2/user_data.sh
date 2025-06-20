@@ -1,11 +1,20 @@
 #!/bin/bash
 yum update -y
-yum install -y docker git
+yum install -y docker git ruby wget
+
+# Start Docker
 systemctl start docker
 systemctl enable docker
-cd /home/ec2-user
 
-# Clone your GitHub repo
+# Install CodeDeploy Agent
+cd /home/ec2-user
+wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+chmod +x ./install
+./install auto
+systemctl start codedeploy-agent
+systemctl enable codedeploy-agent
+
+# Deploy Stylish WebApp
 git clone https://github.com/patelraj-41299/cap-4.git
 cd cap-4/app/frontend/stylish-1.0.0
 
