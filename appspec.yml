@@ -1,8 +1,9 @@
 version: 0.0
 os: linux
 files:
-  - source: app/frontend/stylish-1.0.0
-    destination: /home/ec2-user/stylish-app
+  - source: /
+    destination: /home/ec2-user/app
+
 hooks:
   AfterInstall:
     - location: scripts/install.sh
