@@ -66,10 +66,14 @@ module "dev_codebuild_docker" {
   buildspec_location = "app/frontend/buildspec.yml"
 }
 module "codedeploy" {
-  source                = "../../modules/codedeploy"
-  env                   = "dev"
-  target_group_name     = module.alb.target_group_name
-  service_role_arn      = "arn:aws:iam::060795913786:role/CodeDeployServiceRole"
+  source = "../../modules/codedeploy"
+
   app_name              = "cap4-app-dev"
   deployment_group_name = "cap4-dg-dev"
+  service_role_arn      = "arn:aws:iam::060795913786:role/CodeDeployServiceRole"
+  target_group_name     = module.alb.target_group_name
+
+  ec2_tag_key   = "Name"
+  ec2_tag_type  = "KEY_AND_VALUE"
+  ec2_tag_value = "cap4-dev-ec2"
 }
