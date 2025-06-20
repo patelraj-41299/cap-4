@@ -6,7 +6,7 @@ resource "aws_codedeploy_app" "this" {
 resource "aws_codedeploy_deployment_group" "this" {
   app_name              = aws_codedeploy_app.this.name
   deployment_group_name = var.deployment_group_name
-  service_role_arn      = var.service_role_arn
+  service_role_arn = var.service_role_arn
 
   deployment_style {
     deployment_type   = "IN_PLACE"

@@ -32,3 +32,10 @@ variable "codebuild_project" {
   description = "CodeBuild project name"
   type        = string
 }
+variable "codedeploy_app_name" {
+  type = string
+}
+
+variable "codedeploy_deployment_group" {
+  type = string
+}
