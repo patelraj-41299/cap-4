@@ -46,14 +46,17 @@ module "dev_codebuild" {
 
 
 module "codepipeline" {
-  source            = "../../modules/codepipeline"
-  name              = "cap4-dev-pipeline"
-  role_arn          = "arn:aws:iam::060795913786:role/codepipeline-role"
-  artifact_bucket   = "cap4-terraform-state"
-  connection_arn    = "arn:aws:codeconnections:us-east-1:060795913786:connection/ba598d05-f246-4892-b8aa-307b4cc55c6a"
-  repository        = "patelraj-41299/cap-4"
-  branch            = "main"
-  codebuild_project = module.dev_codebuild.project_name
+  source = "../../modules/codepipeline"
+
+  name                        = "cap4-dev-pipeline"
+  role_arn                    = var.codepipeline_role_arn
+  artifact_bucket             = module.s3.bucket_id
+  connection_arn              = var.connection_arn
+  repository                  = var.repository
+  branch                      = var.branch
+  codebuild_project           = module.dev_codebuild.name
+  codedeploy_app_name         = var.app_name
+  codedeploy_deployment_group = var.deployment_group_name
 }
 
 module "dev_codebuild_docker" {
@@ -76,4 +79,9 @@ module "codedeploy" {
   ec2_tag_key   = "Name"
   ec2_tag_type  = "KEY_AND_VALUE"
   ec2_tag_value = "cap4-dev-ec2"
+}
+
+module "s3" {
+  source      = "../../modules/s3"
+  bucket_name = "cap4-terraform-artifacts-dev"
 }
