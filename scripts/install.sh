@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "AfterInstall script running"
+echo "Install script running"
